@@ -3,6 +3,7 @@ name: Python syntax check
 on:
   push:
   pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read
