@@ -1,0 +1,2 @@
+# Also install dependencies from the course-provided recognition model.
+boto3

@@ -34,6 +34,20 @@ flowchart LR
 - `web-tier/controller.py` — queue-based EC2 start/stop controller.
 - `app-tier/backend.py` — image processing and result delivery.
 
+## Python dependencies
+
+From the repository root, create and activate a virtual environment:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r web-tier/requirements.txt
+```
+
+On an EC2 worker, install `app-tier/requirements.txt` and the dependencies supplied with the course recognition model. The imported `face_recognition.face_match` is course-provided code; the similarly named PyPI package is not a replacement.
+
+Dependency lists reflect source imports and are not a tested version lock. Installing them does not provision AWS resources or supply the missing model assets.
+
 ## Deployment prerequisites
 
 This repository contains application source from the course submission. It is not a self-contained deployment package.
