@@ -11,6 +11,23 @@ A Python face-recognition workflow using a Flask web tier, Amazon S3, Amazon SQS
 
 A separate controller monitors queue depth and starts or stops pre-provisioned EC2 workers, with a configured maximum of 15 instances. It does not create instances or provision infrastructure.
 
+## Architecture
+
+```mermaid
+flowchart LR
+    U[User] --> W[Flask web tier]
+    W --> S3[S3 input bucket]
+    W --> Q[SQS request queue]
+    Q --> A[EC2 recognition workers]
+    S3 --> A
+    A --> O[S3 output bucket]
+    A --> R[SQS response queue]
+    R --> W
+    W --> U
+    C[Scaling controller] -. monitors .-> Q
+    C -. starts and stops .-> A
+```
+
 ## Source layout
 
 - `web-tier/server.py` — HTTP uploads and response coordination.
