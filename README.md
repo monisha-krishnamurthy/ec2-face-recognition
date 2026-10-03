@@ -83,3 +83,15 @@ The adapter preserves the course preprocessing, loads models lazily, honors an o
 Local checks verified safe import, 90 valid reference embeddings, explicit model-path handling, and blank-image handling. The course sample `test_000.jpg` matched its documented label, `Paul`. These checks used the existing Python 3.11 recognition environment; EC2, S3, SQS, and worker lifecycle behavior were not tested.
 
 Adapted from [VISA Lab course inference code](https://github.com/nehavadnere/CSE546-FALL-2025/blob/model/face_recognition.py), marked Copyright 2025, VISA Lab, MIT. Attribution is preserved in the module.
+
+## Worker coordination tests
+
+Run without AWS credentials or model dependencies:
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+Mock-based tests verify request ID propagation, storage and response ordering, acknowledgment after successful processing, and no acknowledgment when download, recognition, storage, or response delivery fails. Importing the worker does not start polling; running `python app-tier/backend.py` starts the AWS worker. The GitHub workflow runs these tests alongside syntax and dependency checks.
+
+These tests validate application coordination, not real S3/SQS behavior. Processing exceptions still propagate and stop the worker; retries require worker restart and SQS visibility timeout expiry. Duplicate delivery and idempotency are not addressed by this refactor.

@@ -27,3 +27,6 @@ jobs:
 
       - name: Verify web-tier imports
         run: python -c "import flask, boto3; print('Web-tier imports passed')"
+
+      - name: Test worker coordination without AWS
+        run: python -m unittest discover -s tests -v
