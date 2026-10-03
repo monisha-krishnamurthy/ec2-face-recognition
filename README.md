@@ -27,6 +27,7 @@ flowchart LR
     C[Scaling controller] -. monitors .-> Q
     C -. starts and stops .-> A
 ```
+[![Python syntax check](https://github.com/monisha-krishnamurthy/ec2-face-recognition/actions/workflows/python-check.yml/badge.svg)](https://github.com/monisha-krishnamurthy/ec2-face-recognition/actions/workflows/python-check.yml)
 
 ## Source layout
 
