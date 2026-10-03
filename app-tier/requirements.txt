@@ -1,2 +1,4 @@
-# Also install dependencies from the course-provided recognition model.
 boto3
+torch
+facenet-pytorch
+Pillow
